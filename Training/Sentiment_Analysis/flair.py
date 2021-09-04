@@ -4,7 +4,10 @@ import pandas as pd
 import time
 import re
 
-
+whitespace = re.compile(r"\s+")
+web_address = re.compile(r"(?i)http(s):\/\/[a-z0-9.~_\-\/]+")
+tesla = re.compile(r"(?i)@Solana(?=\b)")
+user = re.compile(r"(?i)@[a-z0-9_]+")
 # read bearer token for authentication
 
 BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAMR1TQEAAAAAg7XmeThysyZhVgfGdRuWWbrp27w%3DSFFQdgkHK0y3j3DpzbRBE1TeboIHPoSJ9ZlY3iRwrSV5HgE4d7'
@@ -13,7 +16,7 @@ BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAMR1TQEAAAAAg7XmeThysyZhVgfGdRuWWbrp27w%3DSF
 endpoint = 'https://api.twitter.com/2/tweets/search/recent'
 headers = {'authorization': f'Bearer {BEARER_TOKEN}'}
 params = {
-    'query': '(tesla OR tsla OR elon musk) (lang:en)',
+    'query': '(solana OR SOL OR ignition) (lang:en)',
     'max_results': '100',
     'tweet.fields': 'created_at,lang'
 }
@@ -55,43 +58,18 @@ while True:
                             params=params,
                             headers=headers)  # send the request
     now = pre60  # move the window 60 minutes earlier
-    # iteratively append our tweet data to our dataframe
-#    increment += 1
-    for element in response.json():
-        if 'errors' in element:
-            del element['errors']
 
-        # print(response.json())
     for tweet in response.json()['data']:
         row = get_data(tweet)  # we defined this function earlier
         df = df.append(row, ignore_index=True)
+        tweets = df.text.values.tolist()
+        print(tweets)
 
-tweets = df.text.values.tolist()
-
-for tweet in tweets: 
-    whitespace = re.compile(r"\s+")
-    web_address = re.compile(r"(?i)http(s):\/\/[a-z0-9.~_\-\/]+")
-    tesla = re.compile(r"(?i)@Solana(?=\b)")
-    user = re.compile(r"(?i)@[a-z0-9_]+")
-
-    # we then use the sub method to replace anything matching
-    tweet = whitespace.sub(' ', tweet)
-    tweet = web_address.sub('', tweet)
-    tweet = tesla.sub('Solana', tweet)
-    tweet = user.sub('', tweet)
-
-
-# Sentiment detection model
-sentiment_model = flair.models.TextClassifier.load('en-sentiment')
-
-sentence = flair.data.Sentence(TEXT)
-sentiment_model.predict(sentence)
-
-
-
-
-        
     for tweet in tweets: 
+        whitespace = re.compile(r"\s+")
+        web_address = re.compile(r"(?i)http(s):\/\/[a-z0-9.~_\-\/]+")
+        tesla = re.compile(r"(?i)@Solana(?=\b)")
+        user = re.compile(r"(?i)@[a-z0-9_]+")
 
         # we then use the sub method to replace anything matching
         tweet = whitespace.sub(' ', tweet)
@@ -99,24 +77,4 @@ sentiment_model.predict(sentence)
         tweet = tesla.sub('Solana', tweet)
         tweet = user.sub('', tweet)
 
-df.to_csv("tweets.csv",index="false")
 
-
-# we will append probability and sentiment preds later
-probs = []
-sentiments = []
-
-# use regex expressions (in clean function) to clean tweets
-tweets['text'] = tweets['text'].apply(clean)
-
-for tweet in tweets['text'].to_list():
-    # make prediction
-    sentence = flair.data.Sentence(tweet)
-    sentiment_model.predict(sentence)
-    # extract sentiment prediction
-    probs.append(sentence.labels[0].score)  # numerical score 0-1
-    sentiments.append(sentence.labels[0].value)  # 'POSITIVE' or 'NEGATIVE'
-
-# add probability and sentiment predictions to tweets dataframe
-tweets['probability'] = probs
-tweets['sentiment'] = sentiments

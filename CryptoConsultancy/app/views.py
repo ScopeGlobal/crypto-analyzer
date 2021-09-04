@@ -9,7 +9,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django import template
 
-from pycoingecko.pycoingecko import CoinGeckoAPI
+from pycoingecko import CoinGeckoAPI
 cg = CoinGeckoAPI()
 
 
