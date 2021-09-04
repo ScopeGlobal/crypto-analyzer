@@ -1,106 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>GFG</title>
-	<style>
-	* {
-		box-sizing: border-box;
-		padding: 0px;
-		margin: 0px;
-		font-family: cursive;
-	}
-	html,
-	body {
-		height: 100%;
-	}
-	body {
-		background-color: #f1f5f8;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.card {
-		background-color: white;
-		padding: 25px;
-		border: 1px solid #bbbbbb;
-		border-radius: 5px;
-		box-shadow: 1px 1px 10px 0px rgb(0 0 0 / 25%);
-	}
-	.title {
-		text-align: center;
-		letter-spacing: 1px;
-	}
-	.muted {
-		color: #8e7f7f;
-		display: block;
-		margin-bottom: 10px;
-		text-align: center;
-	}
-	.btn_container {
-		padding: 20px;
-		text-align: center;
-	}
-	.btn {
-		border-radius: 4px;
-		cursor: pointer;
-		padding: 4px 8px;
-		background-color: #ffaaa7;
-		color: white;
-		font-size: 1.2em;
-		font-weight: 600;
-		letter-spacing: 1px;
-	}
-	</style>
-</head>
-<body>
-	<div class="card">
-	<h1 class="title">Buy Me a Chai </h1>
-	<small class="muted"
-		>If you like my work, you can support me by donating ₹200</small
-	>
-	<div class="btn_container">
-		<!-- Payment Button -->
-		<button class="btn" id="pay-btn">Donate</button>
-	</div>
-	</div>
-</body>
-
-<!-- Razorpay's Javascript code. -->
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-	var options = {
-	
-	// Enter the Key ID generated from the Dashboard
-	key: "{{ razorpay_merchant_key }}",
-	
-	// Amount is in currency subunits.
-	// Default currency is INR. Hence,
-	// 50000 refers to 50000 paise
-	amount: "{{ razorpay_amount }}",
-	currency: "{{ currency }}",
-	
-	// Your/store name.
-	name: "Dj Razorpay",
-	
-	// Pass the `id` obtained in the response of Step 1
-	order_id: "{{ razorpay_order_id }}",
-	callback_url: "{{ callback_url }}",
-	};
-	
-	// initialise razorpay with the options.
-	var rzp1 = new Razorpay(options);
-	
-	// add event listener to the payment button.
-	document.getElementById("pay-btn").onclick = function (e) {
-	rzp1.open();
-	e.preventDefault();
-	};
-</script>
-</html>
-
 {% extends 'layouts/base.html' %}
 
 {% block title %} Profile {% endblock title %}
@@ -109,16 +6,19 @@
 
     <!-- Header -->
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" 
-         style="min-height: 600px; background-image: url(/static/assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+        
       <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
       <!-- Header container -->
-      <div class="container-fluid d-flex align-items-center">
+      <div class="container-fluid d-flex align-items-end justify-content-start">
         <div class="row">
-          <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Hello {{ request.user.username }}</h1>
-            <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-            <a href="#!" class="btn btn-info">Edit profile</a>
+        </div>
+        <div class="row">
+          <div class="col-lg-7 col-md-10 ml-5">
+            <!-- <h1 class="display-2 text-white"style="display:inline;">Hello {{ request.user.username }}</h1> -->
+            <!-- <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p> -->
+            <a href="#!" class="btn btn-info" id="pay-btn">Connect</a>
+            
           </div>
         </div>
       </div>
@@ -133,33 +33,33 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="/static/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                    <img src="/static/assets/img/theme/user3.jpg" class="rounded-circle">
                   </a>
                 </div>
               </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
-                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                
               </div>
             </div>
+            
             <div class="card-body pt-0 pt-md-4">
               <div class="row">
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                     <div>
-                      <span class="heading">22</span>
-                      <span class="description">Friends</span>
+                      <span class="heading">{{user.experience}}</span>
+                      <span class="description">Experience</span>
                     </div>
                     <div>
-                      <span class="heading">10</span>
-                      <span class="description">Photos</span>
+                      <span class="heading">{{user.number}}</span>
+                      <span class="description">Consultations</span>
                     </div>
-                    <div>
+                    <!-- <div>
                       <span class="heading">89</span>
                       <span class="description">Comments</span>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -171,13 +71,13 @@
                   {{ request.user.email }}
                 </div>
                 <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                  <i class="ni business_briefcase-24 mr-2"></i>{{user.post}}
                 </div>
                 <div>
-                  <i class="ni education_hat mr-2"></i>University of Computer Science
+                  <i class="ni education_hat mr-2"></i>{{user.company}}
                 </div>
                 <hr class="my-4" />
-                <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
+                <p>{{user.description}}</p>
                 <a href="#">Show more</a>
               </div>
             </div>
@@ -191,7 +91,7 @@
                   <h3 class="mb-0">My account</h3>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+                  <!-- <a href="#!" class="btn btn-sm btn-primary">Settings</a> -->
                 </div>
               </div>
             </div>
@@ -204,14 +104,14 @@
                       <div class="form-group">
                         <label class="form-control-label" for="input-username">Username</label>
                         <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" 
-                               value="{{ request.user.username }}">
+                               value="{{ user.username }}">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
                         <input type="email" id="input-email" class="form-control form-control-alternative" 
-                               placeholder="{{ request.user.email }}">
+                               placeholder="{{ user.email }}">
                       </div>
                     </div>
                   </div>
@@ -219,13 +119,13 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control form-control-alternative" >
+                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="{{user.first_name}}" >
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control form-control-alternative" >
+                        <input type="text" id="input-last-name" class="form-control form-control-alternative"  placeholder="{{user.last_name}}">
                       </div>
                     </div>
                   </div>
@@ -269,7 +169,7 @@
                 <div class="pl-lg-4">
                   <div class="form-group">
                     <label>About Me</label>
-                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">{{user.about}}</textarea>
                   </div>
                 </div>
               </form>
@@ -285,4 +185,70 @@
 {% endblock content %}
 
 <!-- Specific JS goes HERE --> 
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+	var options = {
+	
+	// Enter the Key ID generated from the Dashboard
+	key: "{{ razorpay_merchant_key }}",
+	
+	// Amount is in currency subunits.
+	// Default currency is INR. Hence,
+	// 50000 refers to 50000 paise
+	amount: "{{ user.price }}",
+	currency: "{{ currency }}",
+	
+	// Your/store name.
+	name: "Dj Razorpay",
+	
+	// Pass the `id` obtained in the response of Step 1
+	order_id: "{{ razorpay_order_id }}",
+	callback_url: "{{ callback_url }}",
+	};
+	
+	// initialise razorpay with the options.
+	var rzp1 = new Razorpay(options);
+	
+	// add event listener to the payment button.
+	document.getElementById("pay-btn").onclick = function (e) {
+	rzp1.open();
+	e.preventDefault();
+	};
+</script>
+{% endblock javascripts %}
+
+<!-- Razorpay's Javascript code. -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+	var options = {
+	
+	// Enter the Key ID generated from the Dashboard
+	key: "{{ razorpay_merchant_key }}",
+	
+	// Amount is in currency subunits.
+	// Default currency is INR. Hence,
+	// 50000 refers to 50000 paise
+	amount: "{{ razorpay_amount }}",
+	currency: "{{ currency }}",
+	
+	// Your/store name.
+	name: "Dj Razorpay",
+	
+	// Pass the `id` obtained in the response of Step 1
+	order_id: "{{ razorpay_order_id }}",
+	callback_url: "{{ callback_url }}",
+	};
+	
+	// initialise razorpay with the options.
+	var rzp1 = new Razorpay(options);
+	
+	// add event listener to the payment button.
+	document.getElementById("pay-btn").onclick = function (e) {
+	rzp1.open();
+	e.preventDefault();
+	};
+</script>
+</html>
+
+

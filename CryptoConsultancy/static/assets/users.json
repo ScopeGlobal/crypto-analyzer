@@ -1,0 +1,12 @@
+{
+    "1" : {"username":"harshS","first_name" : "Harsh" ,"last_name" : "Sawant","fees":2000,"number":3,"experience":"10", "email":"harsh@gmail.com"},
+    "2" : {"username":"nimishP","first_name" : "Nimish" ,"last_name" : "Patil","fees":1000,"number":5,"experience":"8", "email":"nimish@gmail.com"},
+    "3" : {"username":"srim","first_name" : "Sridhar" ,"last_name" : "Menon","fees":1500,"number":2,"experience":"1", "email":"sridhar@gmail.com"},
+    "4" : {"username":"omka","first_name" : "Omkar" ,"last_name" : "Kariappa","fees":1800,"number":1,"experience":"3", "email":"omkar@gmail.com"},
+    "5" : {"username":"sru","first_name" : "Shrutik" ,"last_name" : "Mali","fees":500,"number":6,"experience":"5", "email":"shrutik@gmail.com"},
+    "6" : {"username":"zeal","first_name" : "Zil" ,"last_name" : "Jani","fees":300,"number":9,"experience":"2", "email":"zil@gmail.com"},
+    "7" : {"username":"prici","first_name" : "Prince" ,"last_name" : "Karania","fees":5000,"number":1,"experience":"6", "email":"prince@gmail.com"},
+    "8" : {"username":"kparas","first_name" : "Paras" ,"last_name" : "Koli","fees":800,"number":0,"experience":"7", "email":"paras@gmail.com"},
+    "9" : {"username":"vp","first_name" : "Vinit" ,"last_name" : "Patel","fees":1700,"number":10,"experience":"4", "email":"vinit@gmail.com"},
+    "10" : {"username":"ap","first_name" : "Atharva" ,"last_name" : "Patil","fees":2000,"number":12,"experience":"5", "email":"atharva@gmail.com"}
+}

@@ -6,18 +6,20 @@
 
     <!-- Header -->
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" 
-         style="min-height: 600px; background-image: url(/static/assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+        
       <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
       <!-- Header container -->
-      <div class="container-fluid d-flex align-items-center">
+      <div class="container-fluid d-flex align-items-end justify-content-start">
         <div class="row">
-          <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Hello {{ request.user.username }}</h1>
-            <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+          <div class="col-lg-7 col-md-10 mr-5">
+            <!-- <h1 class="display-2 text-white"style="display:inline;">Hello {{ request.user.username }}</h1> -->
+            <!-- <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p> -->
             <a href="#!" class="btn btn-info">Edit profile</a>
+            
           </div>
         </div>
+        
       </div>
     </div>
 
@@ -30,15 +32,15 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="/static/assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                    <img src="/static/assets/img/theme/user3.jpg" class="rounded-circle">
                   </a>
                 </div>
               </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
-                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                <!-- <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                <a href="#" class="btn btn-sm btn-default float-right">Message</a> -->
               </div>
             </div>
             <div class="card-body pt-0 pt-md-4">
@@ -46,17 +48,17 @@
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                     <div>
-                      <span class="heading">22</span>
-                      <span class="description">Friends</span>
+                      <span class="heading">{{user.experience}}</span>
+                      <span class="description">Experience</span>
                     </div>
                     <div>
-                      <span class="heading">10</span>
-                      <span class="description">Photos</span>
+                      <span class="heading">{{user.number}}</span>
+                      <span class="description">Consultations</span>
                     </div>
-                    <div>
+                    <!-- <div>
                       <span class="heading">89</span>
                       <span class="description">Comments</span>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -68,13 +70,13 @@
                   {{ request.user.email }}
                 </div>
                 <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                  <i class="ni business_briefcase-24 mr-2"></i>{{user.post}}
                 </div>
                 <div>
-                  <i class="ni education_hat mr-2"></i>University of Computer Science
+                  <i class="ni education_hat mr-2"></i>{{user.company}}
                 </div>
                 <hr class="my-4" />
-                <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
+                <p>{{user.description}}</p>
                 <a href="#">Show more</a>
               </div>
             </div>
@@ -166,7 +168,7 @@
                 <div class="pl-lg-4">
                   <div class="form-group">
                     <label>About Me</label>
-                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">{{user.about}}</textarea>
                   </div>
                 </div>
               </form>
@@ -182,4 +184,4 @@
 {% endblock content %}
 
 <!-- Specific JS goes HERE --> 
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}{%endblock %}

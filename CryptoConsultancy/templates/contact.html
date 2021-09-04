@@ -27,19 +27,19 @@
                 </tr>
             </thead>
             <tbody>
-            {% for expert in experts %}
+            {% for key,value in experts.items %}
                 <tr>
                 <th scope="row">
-                    <a href="/payment/{{expert.id}}/" style="text-decoration: none;">{{ expert.name }}</a>
+                    <a href="/payment/{{key}}" style="text-decoration: none;">{{ value.first_name }} {{value.last_name}}</a>
                 </th>
                 <td>
-                    {{ expert.experience }} 
+                    {{ value.experience }} Yrs.
                 </td>
                 <td>
-                    {{ expert.fees }} $
+                    {{ value.fees }} $
                 </td>
                 <td>
-                    {{ expert.number }}
+                    {{ value.number }}
                 </td>
                 </tr>
             {% endfor %}

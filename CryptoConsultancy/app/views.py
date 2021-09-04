@@ -8,10 +8,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
 from django.http import HttpResponse
 from django import template
+import json
 
 from pycoingecko import CoinGeckoAPI
 cg = CoinGeckoAPI()
 
+json_data = open('static/assets/users.json')   
+data1 = json.load(json_data) # deserialises it
+data2 = json.dumps(data1) # json formatted string
+
+json_data.close()
 
 @login_required(login_url="/login/")
 def index(request):
@@ -27,8 +33,7 @@ def analysis(request,id):
 
 @login_required(login_url="/login/")
 def contact(request):
-    experts = [{'id':1,'name':'Harsh','fees':'2000','number':3,'experience':'10 years'}]
-    return render(request,'contact.html',{'experts':experts})
+    return render(request,'contact.html',{'experts':data1})
 
 @login_required(login_url="/login")
 def profile(request):

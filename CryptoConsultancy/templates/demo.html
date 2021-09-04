@@ -38,6 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                
                 {% for coin, coin_value in data.items %}
                     <tr>
                     <th scope="row">
@@ -50,7 +51,7 @@
                         {{ coin_value.usd_market_cap}} $
                     </td>
                     <td>
-                        <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
+                         {{ coin_value.usd_24h_vol }}
                     </td>
                     </tr>
                 {% endfor %}
