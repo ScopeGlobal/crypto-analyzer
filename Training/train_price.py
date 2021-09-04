@@ -2,7 +2,6 @@
 
 # imports
 import numpy as np
-from numpy.core.fromnumeric import mean 
 import pandas as pd
 import os
 import matplotlib.pyplot as plt 
@@ -46,6 +45,7 @@ def train_price(currency):
     pickle.dump(rf_model, open(filename, 'wb'))
 
    # testing to see if our values are accurate
+   # TODO: remove before submission
    print(rf_model.predict(x.tail()))
 
    print("Actual Values")
@@ -72,7 +72,7 @@ def real_time_test(currency):
     print(result)
 
     result_error = mean_absolute_error(real_time_result, result)
-    print(result_error)
+    print(result_error)         
 
 
 train_price('Bitcoin')
