@@ -21,13 +21,13 @@
           <!-- Card stats -->
           {% for coin, coin_value in data.items %}
           <div class="row">
-            <div class="col-xl-3 col-lg-6">
+            <div class="col-xl-6 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Price</h5>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Current Price</h5>
                       <span class="h2 font-weight-bold mb-0">{{ coin_value.usd }} $</span>
                     </div>
                     <div class="col-auto">
@@ -44,7 +44,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-6">
+            <div class="col-xl-6 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
@@ -66,7 +66,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-6">
+            <!-- <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
@@ -107,7 +107,7 @@
                   </p>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           {% endfor %}
         </div>
@@ -117,15 +117,15 @@
     <div class="container-fluid mt--7">
 
       <div class="row">
-        <div class="col-xl-6x mb-5 mb-xl-0">
+        <div class="col-xl-6 mb-5 mb-xl-0">
           <div class="card bg-gradient-default shadow">
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
-                  <h6 class="text-uppercase text-light ls-1 mb-1">Name</h6>
-                  <h2 class="text-white mb-0">Sales value</h2>
+                  <h6 class="text-uppercase text-light ls-1 mb-1">{{id}}</h6>
+                  <h2 class="text-white mb-0">Open And Close Value</h2>
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                   <ul class="nav nav-pills justify-content-end">
                     <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
                       <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
@@ -140,7 +140,7 @@
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="card-body">
@@ -157,8 +157,8 @@
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
-                  <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
-                  <h2 class="mb-0">Total orders</h2>
+                  <!-- <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6> -->
+                  <h2 class="mb-0">Predicted Value</h2>
                 </div>
               </div>
             </div>

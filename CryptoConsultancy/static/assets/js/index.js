@@ -226,8 +226,10 @@ const app = new Vue({
   
         // Initialize the local stream
         this.localStream.init(
+            
           () => {
             // Play the local stream
+            alert("init called")
             this.localStream.play("local-video");
             // Publish the local stream
             this.client.publish(this.localStream, (err) => {

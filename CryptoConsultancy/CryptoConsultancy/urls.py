@@ -21,4 +21,5 @@ urlpatterns = [
     path("", include("authentication.urls")), 
     path("", include("app.urls")),
     path('', include('agora.urls')),            
+    path('', include('payment.urls')),            
 ]

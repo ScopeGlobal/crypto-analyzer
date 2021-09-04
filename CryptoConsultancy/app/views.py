@@ -9,7 +9,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django import template
 
-from pycoingecko.pycoingecko import CoinGeckoAPI
+from pycoingecko import CoinGeckoAPI
 cg = CoinGeckoAPI()
 
 
@@ -29,3 +29,7 @@ def analysis(request,id):
 def contact(request):
     experts = [{'id':1,'name':'Harsh','fees':'2000','number':3,'experience':'10 years'}]
     return render(request,'contact.html',{'experts':experts})
+
+@login_required(login_url="/login")
+def profile(request):
+    return render(request,'profile.html')

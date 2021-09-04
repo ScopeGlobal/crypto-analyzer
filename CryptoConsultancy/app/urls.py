@@ -12,5 +12,6 @@ urlpatterns = [
     path('analysis/<id>/', views.analysis, name='analysis'),
     path('index', views.index, name='index'),
     path('contact', views.contact, name='contact'),
+    path('profile', views.profile, name='profile'),
 
 ]

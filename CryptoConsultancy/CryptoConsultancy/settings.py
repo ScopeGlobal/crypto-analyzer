@@ -22,6 +22,12 @@ environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+RAZOR_KEY_ID = 'rzp_test_ceB5I6a4ayjvV8'
+RAZOR_KEY_SECRET = 'LRImXYE4yUnOKdPUhow6vAu6'
+
+	
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/

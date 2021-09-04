@@ -1,14 +1,20 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %} Dashboard {% endblock title %}
+{% block title %} Index {% endblock title %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+    <style>
+        #table-top{
+            margin-top:6rem;
+        }
+    </style>
+{% endblock stylesheets %}
 
 {% block content %}
     <div class="container">
         <div class="row mt-5">
-        <div class="col-xl-8 mb-5 mb-xl-0">
+        <div class="col-xl-12 mb-5 mb-xl-0 "id="table-top">
             <div class="card shadow">
             <div class="card-header border-0">
                 <div class="row align-items-center">
