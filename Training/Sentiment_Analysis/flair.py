@@ -59,22 +59,25 @@ while True:
                             headers=headers)  # send the request
     now = pre60  # move the window 60 minutes earlier
 
-    for tweet in response.json()['data']:
-        row = get_data(tweet)  # we defined this function earlier
-        df = df.append(row, ignore_index=True)
-        tweets = df.text.values.tolist()
-        print(tweets)
+    try:
+        for tweet in response.json()['data']:
+            row = get_data(tweet)  # we defined this function earlier
+            df = df.append(row, ignore_index=True)
+            tweets = df.text.values.tolist()
+            # print(tweets)
 
-    for tweet in tweets: 
-        whitespace = re.compile(r"\s+")
-        web_address = re.compile(r"(?i)http(s):\/\/[a-z0-9.~_\-\/]+")
-        tesla = re.compile(r"(?i)@Solana(?=\b)")
-        user = re.compile(r"(?i)@[a-z0-9_]+")
+        for tweet in tweets: 
+            whitespace = re.compile(r"\s+")
+            web_address = re.compile(r"(?i)http(s):\/\/[a-z0-9.~_\-\/]+")
+            solana = re.compile(r"(?i)@Solana(?=\b)")
+            user = re.compile(r"(?i)@[a-z0-9_]+")
 
-        # we then use the sub method to replace anything matching
-        tweet = whitespace.sub(' ', tweet)
-        tweet = web_address.sub('', tweet)
-        tweet = tesla.sub('Solana', tweet)
-        tweet = user.sub('', tweet)
-
+            # we then use the sub method to replace anything matching
+            tweet = whitespace.sub(' ', tweet)
+            tweet = web_address.sub('', tweet)
+            tweet = tesla.sub('Solana', tweet)
+            tweet = user.sub('', tweet)
+            print(tweet)
+    except KeyError:
+        continue
 

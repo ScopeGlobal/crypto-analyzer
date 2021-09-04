@@ -12,10 +12,6 @@ import pickle
 
 filename = 'finalized.sav'
 
-# Secondary Imports to Test for error testing
-# TODO: Remove all Error related imports when designing final version.
-from sklearn.metrics import mean_absolute_error
-
 def train_price(currency):
    df = pd.read_csv('./data/archive/coin_' + currency + '.csv')
    
@@ -44,17 +40,6 @@ def train_price(currency):
    if not os.path.isfile(filename):
     pickle.dump(rf_model, open(filename, 'wb'))
 
-   # testing to see if our values are accurate
-   # TODO: remove before submission
-   print(rf_model.predict(x.tail()))
-
-   print("Actual Values")
-   print(y)
-
-   # using mean absolute error to further determine accuracy
-   rf_values_error = mean_absolute_error(yval, rf_prediction)
-   print(rf_values_error)
-
 
 def real_time_test(currency):
     cg = pycoingecko.CoinGeckoAPI()
@@ -62,17 +47,22 @@ def real_time_test(currency):
         cg.get_coin_ohlc_by_id(id=currency.lower(), days=30, vs_currency='usd'), 
         columns=['Marketcap', 'Open', 'High', 'Low', 'Close']
     )
-    print(real_time_df)
+    
 
     cleaned_real_time_df = real_time_df[["High", "Low", "Marketcap"]]
     real_time_result = real_time_df["Close"]
+
+    if not os.path.isfile('real_time_result_rf'):
+        real_time_result.to_csv('real_time_result_rf.csv')
 
     load_model = pickle.load(open(filename, 'rb'))
     result = load_model.predict(cleaned_real_time_df)
     print(result)
 
-    result_error = mean_absolute_error(real_time_result, result)
-    print(result_error)         
+    if not os.path.isfile('predicted_result_rf'):
+        predicted_df = pd.DataFrame(result)
+        predicted_df.to_csv('predicted_result_rf.csv')
+         
 
 
 train_price('Bitcoin')
