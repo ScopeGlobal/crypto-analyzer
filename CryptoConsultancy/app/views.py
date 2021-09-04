@@ -9,34 +9,23 @@ from django.template import loader
 from django.http import HttpResponse
 from django import template
 
+from pycoingecko import CoinGeckoAPI
+cg = CoinGeckoAPI()
+
+
 @login_required(login_url="/login/")
 def index(request):
-    
-    context = {}
-    context['segment'] = 'index'
-
-    html_template = loader.get_template( 'index.html' )
-    return HttpResponse(html_template.render(context, request))
+    data = cg.get_price(ids='bitcoin,litecoin,ethereum,binance coin,tether', vs_currencies='usd', include_market_cap='true', include_24hr_vol='true', include_24hr_change='true', include_last_updated_at='true')
+    return render(request, 'demo.html',{'data':data})
 
 @login_required(login_url="/login/")
-def pages(request):
-    context = {}
-    # All resource paths end in .html.
-    # Pick out the html file name from the url. And load that template.
-    try:
-        
-        load_template      = request.path.split('/')[-1]
-        context['segment'] = load_template
-        
-        html_template = loader.get_template( load_template )
-        return HttpResponse(html_template.render(context, request))
-        
-    except template.TemplateDoesNotExist:
+def analysis(request,id):
+    data = cg.get_price(ids=id, vs_currencies='usd', include_market_cap='true', include_24hr_vol='true', include_24hr_change='true', include_last_updated_at='true')
+    id = 'bitcoin'
+    return render(request, 'main.html',{'data':data,'id':id})
 
-        html_template = loader.get_template( 'page-404.html' )
-        return HttpResponse(html_template.render(context, request))
 
-    except:
-    
-        html_template = loader.get_template( 'page-500.html' )
-        return HttpResponse(html_template.render(context, request))
+@login_required(login_url="/login/")
+def contact(request):
+    experts = [{'id':1,'name':'Harsh','fees':'2000','number':3,'experience':'10 years'}]
+    return render(request,'contact.html',{'experts':experts})

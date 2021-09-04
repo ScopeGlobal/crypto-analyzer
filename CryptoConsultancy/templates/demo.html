@@ -1,0 +1,63 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+        <div class="col-xl-8 mb-5 mb-xl-0">
+            <div class="card shadow">
+            <div class="card-header border-0">
+                <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="mb-0">Coins</h3>
+                </div>
+                <div class="col text-right">
+                    <!-- <a href="#!" class="btn btn-sm btn-primary">See all</a> -->
+                </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <!-- Projects table -->
+                <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                    <tr>
+                    <th scope="col">Coin name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Market Capital</th>
+                    <th scope="col">24h Volume</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for coin, coin_value in data.items %}
+                    <tr>
+                    <th scope="row">
+                        <a href="/analysis/{{coin}}/" style="text-decoration: none;">{{ coin }}</a>
+                    </th>
+                    <td>
+                        {{ coin_value.usd }} $
+                    </td>
+                    <td>
+                        {{ coin_value.usd_market_cap}} $
+                    </td>
+                    <td>
+                        <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
+                    </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+                </table>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock content %}
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}
+
+

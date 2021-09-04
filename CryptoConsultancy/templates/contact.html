@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+    <div class="col-xl-8 mb-5 mb-xl-0">
+        <div class="card shadow">
+        <div class="card-header border-0">
+            <div class="row align-items-center">
+            <div class="col">
+                <h3 class="mb-0">Experts</h3>
+            </div>
+            <div class="col text-right">
+                <!-- <a href="#!" class="btn btn-sm btn-primary">See all</a> -->
+            </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+                <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Experience</th>
+                <th scope="col">Fees</th>
+                <th scope="col">Number of Consultations</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for expert in experts %}
+                <tr>
+                <th scope="row">
+                    <a href="/expert/{{expert.id}}/" style="text-decoration: none;">{{ expert.name }}</a>
+                </th>
+                <td>
+                    {{ expert.experience }} 
+                </td>
+                <td>
+                    {{ expert.fees }} $
+                </td>
+                <td>
+                    {{ expert.number }}
+                </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+            </table>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock content%}
