@@ -9,6 +9,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django import template
 import json
+import pandas as pd
 
 from pycoingecko import CoinGeckoAPI
 cg = CoinGeckoAPI()
@@ -18,6 +19,11 @@ data1 = json.load(json_data) # deserialises it
 data2 = json.dumps(data1) # json formatted string
 
 json_data.close()
+
+
+# df_open = pd.read_csv('static/assets/csv/predicted_open_result_rf.csv',names = ['predicted_open']) 
+# df_result = pd.read_csv('static/assets/csv/predicted_result_rf.csv', names=['predicted_close'])
+
 
 @login_required(login_url="/login/")
 def index(request):
