@@ -31,7 +31,7 @@ def payment(request,id):
 
 	# order id of newly created order.
     razorpay_order_id = razorpay_order['id']
-    callback_url = '/agora/'
+    callback_url = '/videoCall/id'
 
     # we need to pass these details to frontend.
     context = {}

@@ -27,7 +27,6 @@ def index(request):
 @login_required(login_url="/login/")
 def analysis(request,id):
     data = cg.get_price(ids=id, vs_currencies='usd', include_market_cap='true', include_24hr_vol='true', include_24hr_change='true', include_last_updated_at='true')
-    id = 'bitcoin'
     return render(request, 'main.html',{'data':data,'id':id})
 
 

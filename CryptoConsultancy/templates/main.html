@@ -8,14 +8,17 @@
   #chart-sales{
     height:100%;
   }
+  #chart-predict{
+    height:100%;
+  }
 </style>
 {% endblock stylesheets %}
 
 {% block content %}
-  {% with coin=data.id%}
-  {% endwith %}
+  
     <!-- Header -->
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <h1 class="ml-5 mb-5 mt-0">Analysis</h1>
       <div class="container-fluid">
         <div class="header-body">
           <!-- Card stats -->
@@ -38,8 +41,8 @@
                   </div>
                   
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
+                    <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span> -->
                   </p>
                 </div>
               </div>
@@ -60,8 +63,8 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last week</span>
+                    <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> </span>
+                    <span class="text-nowrap">Since last week</span> -->
                   </p>
                 </div>
               </div>
@@ -165,7 +168,68 @@
             <div class="card-body">
               <!-- Chart -->
               <div class="chart">
-                <canvas id="chart-orders" class="chart-canvas"></canvas>
+                <div id="chart-predict" class="chart-predict"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div class="container-fluid mt-5">
+
+      <div class="row">
+        <div class="col-xl-6 mb-5 mb-xl-0">
+          <div class="card bg-gradient-default shadow">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="text-uppercase text-light ls-1 mb-1">{{id}}</h6>
+                  <h2 class="text-white mb-0">Open And Close Value</h2>
+                </div>
+                <!-- <div class="col">
+                  <ul class="nav nav-pills justify-content-end">
+                    <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
+                      <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
+                        <span class="d-none d-md-block">Month</span>
+                        <span class="d-md-none">M</span>
+                      </a>
+                    </li>
+                    <li class="nav-item" data-toggle="chart" data-target="#chart-sales" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k">
+                      <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
+                        <span class="d-none d-md-block">Week</span>
+                        <span class="d-md-none">W</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div> -->
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div class="chart">
+                <!-- Chart wrapper -->
+                <div id="chart-sales"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card shadow">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <!-- <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6> -->
+                  <h2 class="mb-0">Predicted Value</h2>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div class="chart">
+                <div id="chart-predict" class="chart-predict"></div>
               </div>
             </div>
           </div>
@@ -206,6 +270,38 @@
 
       // set the container id
       chart.container('chart-sales');
+
+      // draw the chart
+      chart.draw();
+
+    });
+
+  });
+
+  anychart.onDocumentReady(function () {
+
+    // load data
+    anychart.data.loadCsvFile("https://static.anychart.com/git-storage/word-press/data/candlestick-chart-tutorial/EUR_USDHistoricalData2year.csv", function (data) {
+
+      // create a data table
+      var dataTable = anychart.data.table(0, 'MMM d, yyyy');
+      dataTable.addData(data);
+
+      // map data
+      var mapping = dataTable.mapAs({ 'open': 2, 'high': 3, 'low': 4, 'close': 1 });
+
+      // set the chart type
+      var chart = anychart.stock();
+
+      // set the series
+      var series = chart.plot(0).candlestick(mapping);
+      series.name("EUR USD Trade Data");
+
+      // set the chart title
+      chart.title("EUR USD Historical Trade Data");
+
+      // set the container id
+      chart.container('chart-predict');
 
       // draw the chart
       chart.draw();

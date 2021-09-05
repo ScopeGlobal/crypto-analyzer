@@ -74,6 +74,7 @@ const app = new Vue({
       },
   
       getUserOnlineStatus(id) {
+        console.log("getUserOnlineStatus")
         const onlineUserIndex = this.onlineUsers.findIndex(
           (data) => data.id === id
         );
