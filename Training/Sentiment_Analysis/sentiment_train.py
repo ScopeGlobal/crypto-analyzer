@@ -7,7 +7,7 @@ import re
 
 # read bearer token for authentication
 
-BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAMR1TQEAAAAAg7XmeThysyZhVgfGdRuWWbrp27w%3DSFFQdgkHK0y3j3DpzbRBE1TeboIHPoSJ9ZlY3iRwrSV5HgE4d7'
+BEARER_TOKEN = ''
 
 # setup the API request
 endpoint = 'https://api.twitter.com/2/tweets/search/recent'
